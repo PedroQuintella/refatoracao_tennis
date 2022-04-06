@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 class Game:
+    zeroPoints = "Love"
+    fifteenPoints = "Fifteen"
+    thirtyPoints = "Thirty"
+    moreThanThirtyPoints = "Deuce"
+    tie = "-All"
+    
     def __init__(self, player1Name, player2Name):
         self.player1Name = player1Name
         self.player2Name = player2Name
@@ -16,14 +22,14 @@ class Game:
         result = ""
         if self.tieWithLessThanThreeHits():
             if self.playerWithoutPoints():
-                result = "Love"
+                result = self.zeroPoints
             if self.playerHasFifteenPoints():
-                result = "Fifteen"
+                result = self.fifteenPoints
             if self.playerHasThirtyPoints():
-                result = "Thirty"
-            result += "-All"
+                result = self.thirtyPoints
+            result += self.tie
         if self.tieWithMoreThanTwoHits():
-            result = "Deuce"
+            result = self.moreThanThirtyPoints
         
         P1res = ""
         P2res = ""
