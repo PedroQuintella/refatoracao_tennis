@@ -14,15 +14,15 @@ class Game:
     
     def score(self):
         result = ""
-        if (self.p1points == self.p2points and self.p1points < 3):
-            if (self.p1points==0):
+        if self.tieWithLessThanThreeHits():
+            if self.playerWithoutPoints():
                 result = "Love"
-            if (self.p1points==1):
+            if self.playerHasFifteenPoints():
                 result = "Fifteen"
-            if (self.p1points==2):
+            if self.playerHasThirtyPoints():
                 result = "Thirty"
             result += "-All"
-        if (self.p1points==self.p2points and self.p1points>2):
+        if self.tieWithMoreThanTwoHits():
             result = "Deuce"
         
         P1res = ""
@@ -96,3 +96,23 @@ class Game:
     
     def P2Score(self):
         self.p2points +=1
+        
+    def tieWithLessThanThreeHits(self):
+        if self.p1points == self.p2points and self.p1points < 3:
+            return True
+
+    def playerWithoutPoints(self):
+        if self.p1points == 0:
+            return True
+
+    def playerHasFifteenPoints(self):
+        if self.p1points == 1:
+            return True
+
+    def playerHasThirtyPoints(self):
+        if self.p1points == 2:
+            return True
+
+    def tieWithMoreThanTwoHits(self):
+        if self.p1points == self.p2points and self.p1points > 2:
+            return True
