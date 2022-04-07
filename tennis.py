@@ -6,13 +6,14 @@ class Game:
     fortyPoints = "Forty"
     moreThanThirtyPoints = "Deuce"
     tie = "-All"
+    playerAdvantage = "Advantage "
+    playerWin = "Win for "
 
     def __init__(self, player1Name, player2Name):
         self.player1Name = player1Name
         self.player2Name = player2Name
         self.p1points = 0
         self.p2points = 0
-
 
     def won_point(self, playerName):
         if playerName == self.player1Name:
@@ -39,46 +40,35 @@ class Game:
             P1res = self.playerOnePoints()
             P2res = self.zeroPoints
             result = P1res + "-" + P2res
-        else:
-            if self.onlyPlayerTwoScored():
-                P2res = self.playerTwoPoints()
-                P1res = self.zeroPoints
-                result = P1res + "-" + P2res
+
+        if self.onlyPlayerTwoScored():
+            P2res = self.playerTwoPoints()
+            P1res = self.zeroPoints
+            result = P1res + "-" + P2res
 
         if self.playerOneWinningWithLessThanFourHits():
-            if (self.p1points == 2):
-                P1res = "Thirty"
-            if (self.p1points == 3):
-                P1res = "Forty"
-            if (self.p2points == 1):
-                P2res = "Fifteen"
-            if (self.p2points == 2):
-                P2res = "Thirty"
+            P1res = self.playerOnePoints()
+            P2res = self.playerTwoPoints()
             result = P1res + "-" + P2res
 
         if self.playerTwoWinningWithLessThanFourHits():
-            if (self.p2points == 2):
-                P2res = "Thirty"
-            if (self.p2points == 3):
-                P2res = "Forty"
-            if (self.p1points == 1):
-                P1res = "Fifteen"
-            if (self.p1points == 2):
-                P1res = "Thirty"
+            P2res = self.playerTwoPoints()
+            P1res = self.playerOnePoints()
             result = P1res + "-" + P2res
 
         if self.matchPointForPlayerOne():
-            result = "Advantage " + self.player1Name
+            result = self.playerAdvantage + self.player1Name
 
         if self.matchPointForPlayerTwo():
-            result = "Advantage " + self.player2Name
+            result = self.playerAdvantage + self.player2Name
 
         if self.playerOneWins():
-            result = "Win for " + self.player1Name
+            result = self.playerWin + self.player1Name
 
         if self.playerTwoWins():
-            result = "Win for " + self.player2Name
+            result = self.playerWin + self.player2Name
         return result
+
 
     def SetP1Score(self, number):
         for i in range(number):
