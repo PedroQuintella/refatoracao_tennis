@@ -3,6 +3,7 @@ class Game:
     zeroPoints = "Love"
     fifteenPoints = "Fifteen"
     thirtyPoints = "Thirty"
+    fortyPoints = "Forty"
     moreThanThirtyPoints = "Deuce"
     tie = "-All"
 
@@ -35,26 +36,14 @@ class Game:
         P1res = ""
         P2res = ""
         if self.onlyPlayerOneScored():
-            if (self.p1points == 1):
-                P1res = "Fifteen"
-            if (self.p1points == 2):
-                P1res = "Thirty"
-            if (self.p1points == 3):
-                P1res = "Forty"
-
-            P2res = "Love"
+            P1res = self.playerOnePoints()
+            P2res = self.zeroPoints
             result = P1res + "-" + P2res
-
-        if self.onlyPlayerTwoScored():
-            if (self.p2points == 1):
-                P2res = "Fifteen"
-            if (self.p2points == 2):
-                P2res = "Thirty"
-            if (self.p2points == 3):
-                P2res = "Forty"
-
-            P1res = "Love"
-            result = P1res + "-" + P2res
+        else:
+            if self.onlyPlayerTwoScored():
+                P2res = self.playerTwoPoints()
+                P1res = self.zeroPoints
+                result = P1res + "-" + P2res
 
         if self.playerOneWinningWithLessThanFourHits():
             if (self.p1points == 2):
@@ -156,3 +145,23 @@ class Game:
     def playerTwoWins(self):
         if self.p2points >= 4 and self.p1points >= 0 and (self.p2points - self.p1points) >= 2:
             return True
+
+    def playerOnePoints(self):
+        P1res = ""
+        if self.p1points == 1:
+            P1res = self.fifteenPoints
+        if self.p1points == 2:
+            P1res = self.thirtyPoints
+        if self.p1points == 3:
+            P1res = self.fortyPoints
+        return P1res
+
+    def playerTwoPoints(self):
+        P2res = ""
+        if (self.p2points == 1):
+            P2res = self.fifteenPoints
+        if (self.p2points == 2):
+            P2res = self.thirtyPoints
+        if (self.p2points == 3):
+            P2res = self.fortyPoints
+        return P2res
